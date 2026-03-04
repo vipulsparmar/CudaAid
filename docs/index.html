@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CudaAid — GPU, CUDA & PyTorch Environment Diagnostics</title>
+  <meta name="description" content="CudaAid is a production-grade CLI tool that detects GPU, CUDA, and PyTorch issues, checks compatibility, and recommends fixes." />
+  <meta name="keywords" content="CUDA, PyTorch, GPU, NVIDIA, diagnostics, CLI, deep learning, machine learning" />
+  <meta property="og:title" content="CudaAid — GPU, CUDA & PyTorch Diagnostics" />
+  <meta property="og:description" content="Detect GPU, CUDA & PyTorch environment issues and get instant fix recommendations." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🩺</text></svg>" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- Background effects -->
+<div class="bg-grid"></div>
+<div class="bg-gradient"></div>
+
+<!-- ═══════════════════════ NAVBAR ═══════════════════════ -->
+<nav class="navbar" id="navbar">
+  <div class="container nav-inner">
+    <a href="#" class="nav-brand">
+      <span class="dot"></span>
+      CudaAid
+    </a>
+    <ul class="nav-links">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#demo">Demo</a></li>
+      <li><a href="#commands">Commands</a></li>
+      <li><a href="#architecture">Architecture</a></li>
+      <li><a href="#compatibility">Compatibility</a></li>
+      <li><a href="https://github.com/vipulsparmar/CudaAid" class="nav-cta" target="_blank">GitHub →</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ═══════════════════════ HERO ═══════════════════════ -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-badge">
+      <span class="pulse"></span>
+      v1.0.0 — Production Ready
+    </div>
+
+    <h1>
+      Diagnose your<br />
+      <span class="gradient-text">AI environment</span><br />
+      in seconds
+    </h1>
+
+    <p class="hero-subtitle">
+      CudaAid detects GPU, CUDA, and PyTorch issues, checks version compatibility,
+      and recommends the exact fix — all from one CLI command.
+    </p>
+
+    <div class="hero-actions">
+      <a href="https://github.com/vipulsparmar/CudaAid" class="btn btn-primary" target="_blank">
+        ⭐ Star on GitHub
+      </a>
+      <a href="#demo" class="btn btn-secondary">
+        See it in action ↓
+      </a>
+    </div>
+
+    <div class="install-cmd">
+      <span class="prompt">$</span>
+      <span class="text" id="install-text">pip install git+https://github.com/vipulsparmar/CudaAid.git</span>
+      <button class="copy-btn" id="copy-btn" onclick="copyInstall()">Copy</button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ FEATURES ═══════════════════════ -->
+<section id="features">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-label">Features</span>
+      <h2 class="section-title">Everything you need to debug your stack</h2>
+      <p class="section-desc">
+        From GPU hardware detection to PyTorch version matching — CudaAid covers the entire diagnostics pipeline.
+      </p>
+    </div>
+
+    <div class="features-grid">
+      <div class="feature-card reveal">
+        <div class="feature-icon gpu">🖥️</div>
+        <h3>GPU Detection</h3>
+        <p>Reads device name, driver version, VRAM, and compute capability directly from nvidia-smi with structured query fallbacks.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon cuda">⚡</div>
+        <h3>CUDA Detection</h3>
+        <p>Checks toolkit version via nvcc and runtime version via torch.version.cuda. Handles missing installations gracefully.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon torch">🔥</div>
+        <h3>PyTorch Detection</h3>
+        <p>Reads version, CUDA build tag, cuDNN version, and torch.cuda.is_available() with detailed status reporting.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon compat">🔗</div>
+        <h3>Compatibility Engine</h3>
+        <p>Built-in driver → CUDA → PyTorch matrix. Automatically recommends the best stable version combo for your hardware.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon fix">🩹</div>
+        <h3>Auto-Fix</h3>
+        <p>Generates pip install commands to resolve mismatches. Supports dry-run mode to preview before executing.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon export">📤</div>
+        <h3>JSON Export</h3>
+        <p>Export full diagnostics as structured JSON with metadata — perfect for CI pipelines, logs, and team sharing.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ TERMINAL DEMO ═══════════════════════ -->
+<section id="demo" class="terminal-section">
+  <div class="container">
+    <div class="reveal" style="text-align: center; margin-bottom: 48px;">
+      <span class="section-label">Live Preview</span>
+      <h2 class="section-title">See CudaAid in action</h2>
+      <p class="section-desc" style="margin: 16px auto 0;">
+        Premium terminal output with status badges, structured panels, and actionable recommendations.
+      </p>
+    </div>
+
+    <div class="terminal-wrapper reveal">
+      <div class="terminal-header">
+        <span class="terminal-dot red"></span>
+        <span class="terminal-dot yellow"></span>
+        <span class="terminal-dot green"></span>
+        <div class="terminal-tabs">
+          <button class="terminal-tab active" onclick="showTab('check')">cudaaid check</button>
+          <button class="terminal-tab" onclick="showTab('explain')">cudaaid explain</button>
+          <button class="terminal-tab" onclick="showTab('fix')">cudaaid fix --dry-run</button>
+        </div>
+      </div>
+      <div class="terminal-body">
+        <!-- check -->
+        <div class="terminal-content active" id="tab-check">
+          <span class="prompt">$</span> <span class="cmd">cudaaid check</span>
+<br /><br />
+<span class="accent">  ●</span>  <span class="val">CudaAid</span>  <span class="dim">scanning environment …</span>
+<br /><br />
+<span class="line">──────────────────────────────────────────────────────────────</span>
+<br />
+<span class="label">  GPU</span>   <span class="pass">✓ PASS</span>  <span class="dim">│</span>  <span class="label">CUDA</span>   <span class="pass">✓ PASS</span>  <span class="dim">│</span>  <span class="label">PyTorch</span>   <span class="pass">✓ PASS</span>
+<br />
+<span class="line">──────────────────────────────────────────────────────────────</span>
+<br /><br />
+<span class="accent">  ⬡  GPU</span>
+<br />
+<span class="label">    Device          </span><span class="val">NVIDIA GeForce RTX 3050</span>          <span class="pass">✓ PASS</span>
+<br />
+<span class="label">    Driver          </span><span class="val">560.94</span>                           <span class="pass">✓ PASS</span>
+<br />
+<span class="label">    VRAM            </span><span class="val">8192 MiB</span>
+<br />
+<span class="label">    Compute Cap.    </span><span class="val">8.6</span>
+<br /><br />
+<span class="accent">  ⚡ CUDA</span>
+<br />
+<span class="label">    Toolkit (nvcc)  </span><span class="val">12.6</span>                             <span class="pass">✓ PASS</span>
+<br />
+<span class="label">    Runtime (torch) </span><span class="val">12.6</span>
+<br />
+<span class="label">    nvcc in PATH    </span><span class="pass">Yes</span>
+<br /><br />
+<span class="accent">  🔥 PyTorch</span>
+<br />
+<span class="label">    Version         </span><span class="val">2.8.0+cu126</span>                      <span class="pass">✓ PASS</span>
+<br />
+<span class="label">    CUDA built-in   </span><span class="val">12.6</span>
+<br />
+<span class="label">    CUDA available  </span><span class="pass">True</span>                             <span class="pass">✓ PASS</span>
+<br />
+<span class="label">    cuDNN           </span><span class="val">91.0.2</span>
+<br /><br />
+<span class="line">──────────────────────────────────────────────────────────────</span>
+<br />
+<span class="pass">  ✓  ALL CHECKS PASSED</span>
+<br />
+<span class="dim">  Driver 560.94 supports up to CUDA 12.6.</span>
+<br />
+<span class="line">──────────────────────────────────────────────────────────────</span>
+<br /><br />
+<span class="accent">  RECOMMENDATIONS</span>
+<br />
+<span class="dim">   1.</span>  <span class="pass">✓</span>  <span class="pass">Recommended: PyTorch 2.6.0 with CUDA 12.4</span>
+<br />
+<span class="pass">      $ pip install torch==2.6.0 --index-url https://download.pytorch.org/whl/cu124</span>
+        </div>
+
+        <!-- explain -->
+        <div class="terminal-content" id="tab-explain">
+          <span class="prompt">$</span> <span class="cmd">cudaaid explain</span>
+<br /><br />
+<span class="accent">  ●</span>  <span class="val">CudaAid</span>  <span class="dim">v1.0.0</span>
+<br /><br />
+<span class="line">╭─── Detailed Explanation ─────────────────────────────────────╮</span>
+<br /><br />
+<span class="accent">  GPU</span>
+<br />
+<span class="label">    You have an </span><span class="pass">NVIDIA GeForce RTX 3050</span><span class="label"> with</span>
+<br />
+<span class="label">    </span><span class="val">8192</span><span class="label"> MiB VRAM and compute capability </span><span class="val">8.6</span><span class="label">.</span>
+<br />
+<span class="label">    Driver </span><span class="val">560.94</span><span class="label"> is installed.</span>
+<br /><br />
+<span class="accent">  CUDA</span>
+<br />
+<span class="label">    Toolkit version </span><span class="pass">12.6</span><span class="label"> detected via nvcc.</span>
+<br />
+<span class="label">    PyTorch reports runtime </span><span class="val">12.6</span><span class="label">.</span>
+<br /><br />
+<span class="accent">  PyTorch</span>
+<br />
+<span class="label">    Version </span><span class="pass">2.8.0+cu126</span><span class="label"> (CUDA 12.6).</span>
+<br />
+<span class="label">    torch.cuda.is_available() → </span><span class="pass">True</span>
+<br /><br />
+<span class="accent">  Notes</span>
+<br />
+<span class="dim">    Driver 560.94 supports up to CUDA 12.6.</span>
+<br />
+<span class="dim">    Best match: torch 2.6.0 (cu124).</span>
+<br /><br />
+<span class="line">╰──────────────────────────────────────────────────────────────╯</span>
+        </div>
+
+        <!-- fix -->
+        <div class="terminal-content" id="tab-fix">
+          <span class="prompt">$</span> <span class="cmd">cudaaid fix --dry-run</span>
+<br /><br />
+<span class="accent">  ●</span>  <span class="val">CudaAid</span>  <span class="dim">scanning environment …</span>
+<br /><br />
+<span class="line">╭──────────────────────────────────────────────────────────────╮</span>
+<br />
+<span class="warn">  ▶  DRY RUN</span>
+<br /><br />
+<span class="dim">    The following commands will be shown but not executed.</span>
+<br />
+<span class="line">╰──────────────────────────────────────────────────────────────╯</span>
+<br /><br />
+<span class="line">╭──────────────────────────────────────────────────────────────╮</span>
+<br />
+<span class="dim">    #   </span><span class="label">Command</span>
+<br />
+<span class="dim">    1   </span><span class="pass">$ pip install torch==2.6.0 --index-url</span>
+<br />
+<span class="pass">        https://download.pytorch.org/whl/cu124</span>
+<br />
+<span class="line">╰──────────────────────────────────────────────────────────────╯</span>
+<br /><br />
+<span class="dim">  Remove </span><span class="val">--dry-run</span><span class="dim"> to execute:  </span><span class="val">cudaaid fix</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ COMMANDS ═══════════════════════ -->
+<section id="commands">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-label">CLI Commands</span>
+      <h2 class="section-title">Four commands, zero friction</h2>
+      <p class="section-desc">
+        Each command runs the full detection pipeline and presents results in the format you need.
+      </p>
+    </div>
+
+    <div class="commands-grid">
+      <div class="command-card reveal">
+        <div class="cmd-name">cudaaid check</div>
+        <div class="cmd-desc">Full environment diagnostic with GPU, CUDA, and PyTorch status badges and compatibility verdict.</div>
+      </div>
+      <div class="command-card reveal">
+        <div class="cmd-name">cudaaid explain</div>
+        <div class="cmd-desc">Human-friendly paragraph explanation of your current setup — great for sharing with teammates.</div>
+      </div>
+      <div class="command-card reveal">
+        <div class="cmd-name">cudaaid fix --dry-run</div>
+        <div class="cmd-desc">Show the pip commands that would fix compatibility issues, without actually running them.</div>
+      </div>
+      <div class="command-card reveal">
+        <div class="cmd-name">cudaaid export -f json</div>
+        <div class="cmd-desc">Export full diagnostics as structured JSON with metadata — ideal for CI/CD pipelines.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ ARCHITECTURE ═══════════════════════ -->
+<section id="architecture">
+  <div class="container">
+    <div class="reveal" style="text-align: center; margin-bottom: 48px;">
+      <span class="section-label">Architecture</span>
+      <h2 class="section-title">Clean, modular design</h2>
+      <p class="section-desc" style="margin: 16px auto 0;">
+        Layered architecture with strict separation — detection, analysis, data, and presentation.
+      </p>
+    </div>
+
+    <div class="arch-layers reveal">
+      <div class="arch-layer">
+        <span class="arch-layer-tag detect">Detection</span>
+        <div class="arch-layer-modules">
+          <span class="arch-module">gpu.py</span>
+          <span class="arch-module">cuda.py</span>
+          <span class="arch-module">torch_check.py</span>
+        </div>
+      </div>
+
+      <div class="arch-connector">↓</div>
+
+      <div class="arch-layer">
+        <span class="arch-layer-tag analyse">Analysis</span>
+        <div class="arch-layer-modules">
+          <span class="arch-module">compatibility.py</span>
+        </div>
+      </div>
+
+      <div class="arch-connector">↓</div>
+
+      <div class="arch-layer">
+        <span class="arch-layer-tag data">Data Layer</span>
+        <div class="arch-layer-modules">
+          <span class="arch-module">models.py</span>
+        </div>
+      </div>
+
+      <div class="arch-connector">↓</div>
+
+      <div class="arch-layer">
+        <span class="arch-layer-tag present">Presentation</span>
+        <div class="arch-layer-modules">
+          <span class="arch-module">reporter.py</span>
+          <span class="arch-module">fixer.py</span>
+          <span class="arch-module">cli.py</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ COMPATIBILITY ═══════════════════════ -->
+<section id="compatibility">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-label">Compatibility</span>
+      <h2 class="section-title">Built-in version matrix</h2>
+      <p class="section-desc">
+        CudaAid knows which driver supports which CUDA, and which PyTorch version to recommend.
+      </p>
+    </div>
+
+    <div class="compat-table-wrapper reveal">
+      <table class="compat-table">
+        <thead>
+          <tr>
+            <th>NVIDIA Driver</th>
+            <th>Max CUDA</th>
+            <th>Recommended PyTorch</th>
+            <th>Index URL</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="mono">≥ 560.00</td>
+            <td class="mono">12.6</td>
+            <td class="mono">2.6.0</td>
+            <td class="mono dim">cu124</td>
+          </tr>
+          <tr>
+            <td class="mono">≥ 550.54</td>
+            <td class="mono">12.4</td>
+            <td class="mono">2.6.0</td>
+            <td class="mono dim">cu124</td>
+          </tr>
+          <tr>
+            <td class="mono">≥ 535.54</td>
+            <td class="mono">12.2</td>
+            <td class="mono">2.5.1</td>
+            <td class="mono dim">cu121</td>
+          </tr>
+          <tr>
+            <td class="mono">≥ 525.60</td>
+            <td class="mono">12.0</td>
+            <td class="mono">2.5.1</td>
+            <td class="mono dim">cu121</td>
+          </tr>
+          <tr>
+            <td class="mono">≥ 520.61</td>
+            <td class="mono">11.8</td>
+            <td class="mono">2.4.1</td>
+            <td class="mono dim">cu118</td>
+          </tr>
+          <tr>
+            <td class="mono">≥ 515.43</td>
+            <td class="mono">11.7</td>
+            <td class="mono">2.0.1</td>
+            <td class="mono dim">cu117</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ FOOTER ═══════════════════════ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-brand">🩺 CudaAid</div>
+    <ul class="footer-links">
+      <li><a href="https://github.com/vipulsparmar/CudaAid" target="_blank">GitHub</a></li>
+      <li><a href="https://github.com/vipulsparmar/CudaAid/issues" target="_blank">Issues</a></li>
+      <li><a href="https://github.com/vipulsparmar/CudaAid/blob/main/LICENSE" target="_blank">License</a></li>
+    </ul>
+    <p class="footer-copy">
+      MIT License · Built with Python, Typer & Rich
+    </p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
