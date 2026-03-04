@@ -1,0 +1,3 @@
+"""AI Doctor — GPU, CUDA & PyTorch environment diagnostics CLI."""
+
+__version__ = "1.0.0"
