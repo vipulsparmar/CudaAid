@@ -135,11 +135,11 @@ def export_json(report: EnvironmentReport) -> str:
 # ═══════════════════════════════════════════════════════════════════════════════
 
 _LOGO = r"""
-     _    ___     ____             _
-    / \  |_ _|   |  _ \  ___   ___| |_ ___  _ __
-   / _ \  | |    | | | |/ _ \ / __| __/ _ \| '__|
-  / ___ \ | |    | |_| | (_) | (__| || (_) | |
- /_/   \_\___|   |____/ \___/ \___|\__\___/|_|
+   ____          _        _    _     _
+  / ___|  _   _ | |  __ _| |  / \  (_)  __| |
+ | |     | | | || | / _` | | / _ \ | | / _` |
+ | |___  | |_| || || (_| | |/ ___ \| || (_| |
+  \____|  \___/ |_| \__,_|_/_/   \_\_| \__,_|
 """
 
 
@@ -167,7 +167,7 @@ def _print_brand_line() -> None:
     """Compact single-line brand for sub-commands."""
     console.print(
         f"  [{_ACCENT}]●[/{_ACCENT}]  "
-        f"[bold {_VALUE}]AI Doctor[/bold {_VALUE}]  "
+        f"[bold {_VALUE}]CudaAid[/bold {_VALUE}]  "
         f"[{_DIM}]v{__version__}[/{_DIM}]"
     )
 
@@ -179,12 +179,12 @@ def _print_footer() -> None:
 
     console.print(Rule(style=_BORDER))
     console.print(
-        f"  [{_DIM}]scan completed {ts}  ·  host: {host}  ·  ai-doctor v{__version__}[/{_DIM}]"
+        f"  [{_DIM}]scan completed {ts}  ·  host: {host}  ·  cudaaid v{__version__}[/{_DIM}]"
     )
     console.print(
-        f"  [{_DIM}]run [bold]ai-doctor explain[/bold] for details  ·  "
-        f"[bold]ai-doctor export -f json[/bold] to save  ·  "
-        f"[bold]ai-doctor fix --dry-run[/bold] for remediation[/{_DIM}]"
+        f"  [{_DIM}]run [bold]cudaaid explain[/bold] for details  ·  "
+        f"[bold]cudaaid export -f json[/bold] to save  ·  "
+        f"[bold]cudaaid fix --dry-run[/bold] for remediation[/{_DIM}]"
     )
     console.print()
 
@@ -438,7 +438,7 @@ def _report_to_dict(report: EnvironmentReport) -> dict[str, Any]:
     """Convert the report to a plain dict for JSON export."""
     return {
         "meta": {
-            "tool": "ai-doctor",
+            "tool": "cudaaid",
             "version": __version__,
             "timestamp": datetime.now(timezone.utc).isoformat(),
             "host": platform.node(),

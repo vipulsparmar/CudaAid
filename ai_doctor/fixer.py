@@ -125,7 +125,7 @@ def apply_fixes(report: EnvironmentReport, *, dry_run: bool = True) -> None:
     if dry_run:
         console.print(
             f"  [{_DIM}]Remove [bold]--dry-run[/bold] to execute:  "
-            f"[bold]ai-doctor fix[/bold][/{_DIM}]"
+            f"[bold]cudaaid fix[/bold][/{_DIM}]"
         )
         console.print()
         return
@@ -174,6 +174,6 @@ def apply_fixes(report: EnvironmentReport, *, dry_run: bool = True) -> None:
 
     console.print(Rule(style=_BORDER))
     console.print(
-        f"  [{_DIM}]Run [bold]ai-doctor check[/bold] to verify the changes.[/{_DIM}]"
+        f"  [{_DIM}]Run [bold]cudaaid check[/bold] to verify the changes.[/{_DIM}]"
     )
     console.print()

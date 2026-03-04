@@ -1,14 +1,14 @@
 <![CDATA[<div align="center">
 
 ```
-     _    ___     ____             _
-    / \  |_ _|   |  _ \  ___   ___| |_ ___  _ __
-   / _ \  | |    | | | |/ _ \ / __| __/ _ \| '__|
-  / ___ \ | |    | |_| | (_) | (__| || (_) | |
- /_/   \_\___|   |____/ \___/ \___|\__\___/|_|
+   ____          _        _    _     _
+  / ___|  _   _ | |  __ _| |  / \  (_)  __| |
+ | |     | | | || | / _` | | / _ \ | | / _` |
+ | |___  | |_| || || (_| | |/ ___ \| || (_| |
+  \____|  \___/ |_| \__,_|_/_/   \_\_| \__,_|
 ```
 
-**GPU · CUDA · PyTorch Environment Diagnostics**
+**GPU · CUDA · PyTorch  Environment Diagnostics**
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-3776ab.svg?style=flat-square&logo=python&logoColor=white)](https://python.org)
 [![License: MIT](https://img.shields.io/badge/license-MIT-22c55e.svg?style=flat-square)](LICENSE)
@@ -18,7 +18,7 @@
 
 ---
 
-**AI Doctor** is a production-grade CLI tool that detects GPU, CUDA, and PyTorch environment issues, checks version compatibility, and recommends fixes — all with a premium terminal UI.
+**CudaAid** is a production-grade CLI tool that detects GPU, CUDA, and PyTorch environment issues, checks version compatibility, and recommends fixes — all with a premium terminal UI.
 
 ## ✨ Features
 
@@ -34,8 +34,8 @@
 
 ```bash
 # Clone the repository
-git clone https://github.com/<your-username>/ai-doctor.git
-cd ai-doctor
+git clone https://github.com/<your-username>/CudaAid.git
+cd CudaAid
 
 # Install in editable mode
 pip install -e .
@@ -48,40 +48,40 @@ pip install -e ".[dev]"
 
 ```bash
 # Full environment diagnostic
-ai-doctor check
+cudaaid check
 
 # Human-friendly explanation
-ai-doctor explain
+cudaaid explain
 
 # Show fix commands (dry run)
-ai-doctor fix --dry-run
+cudaaid fix --dry-run
 
 # Apply fixes
-ai-doctor fix
+cudaaid fix
 
 # Export as JSON
-ai-doctor export --format json
+cudaaid export --format json
 
 # Export to file
-ai-doctor export --format json --output report.json
+cudaaid export --format json --output report.json
 
 # Version
-ai-doctor --version
+cudaaid --version
 ```
 
-> **Tip:** If `ai-doctor` gives a permission error, use `python -m ai_doctor` instead.
+> **Tip:** You can also run via `python -m ai_doctor` if the `cudaaid` command isn't available in PATH.
 
 ## 🖼️ Output Preview
 
-### `ai-doctor check`
+### `cudaaid check`
 
 ```
 ╭──────────────────────────────────────────────────────────╮
-│      _    ___     ____             _                     │
-│     / \  |_ _|   |  _ \  ___   ___| |_ ___  _ __        │
-│    / _ \  | |    | | | |/ _ \ / __| __/ _ \| '__|       │
-│   / ___ \ | |    | |_| | (_) | (__| || (_) | |          │
-│  /_/   \_\___|   |____/ \___/ \___|\__\___/|_|          │
+│    ____          _        _    _     _                   │
+│   / ___|  _   _ | |  __ _| |  / \  (_)  __| |           │
+│  | |     | | | || | / _` | | / _ \ | | / _` |           │
+│  | |___  | |_| || || (_| | |/ ___ \| || (_| |           │
+│   \____|  \___/ |_| \__,_|_/_/   \_\_| \__,_|           │
 │   GPU · CUDA · PyTorch  Environment Diagnostics         │
 │   v1.0.0                                                │
 ╰──────────────────────────────────────────────────────────╯
@@ -122,7 +122,7 @@ ai-doctor --version
       ╰────────────────────────────────────────────────────╯
 ```
 
-### `ai-doctor fix --dry-run`
+### `cudaaid fix --dry-run`
 
 ```
 ╭──────────────────────────────────────────────────────────╮
@@ -136,7 +136,7 @@ ai-doctor --version
 │        https://download.pytorch.org/whl/cu124           │
 ╰──────────────────────────────────────────────────────────╯
 
-  Remove --dry-run to execute:  ai-doctor fix
+  Remove --dry-run to execute:  cudaaid fix
 ```
 
 ## 🏗️ Project Structure

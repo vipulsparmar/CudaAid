@@ -41,8 +41,8 @@ _BORDER = "#334155"
 _VALUE  = "#f1f5f9"
 
 app = typer.Typer(
-    name="ai-doctor",
-    help="🩺 AI Environment Doctor — detect GPU, CUDA & PyTorch issues.",
+    name="cudaaid",
+    help="🩺 CudaAid — detect GPU, CUDA & PyTorch issues.",
     add_completion=False,
     rich_markup_mode="rich",
     no_args_is_help=True,
@@ -68,7 +68,7 @@ def _gather_report() -> EnvironmentReport:
     console.print()
     console.print(
         f"  [{_ACCENT}]●[/{_ACCENT}]  "
-        f"[bold {_VALUE}]AI Doctor[/bold {_VALUE}]  "
+        f"[bold {_VALUE}]CudaAid[/bold {_VALUE}]  "
         f"[{_DIM}]scanning environment …[/{_DIM}]"
     )
     console.print()
@@ -186,7 +186,7 @@ def version_callback(
         console.print()
         console.print(
             f"  [{_ACCENT}]●[/{_ACCENT}]  "
-            f"[bold {_VALUE}]ai-doctor[/bold {_VALUE}]  "
+            f"[bold {_VALUE}]cudaaid[/bold {_VALUE}]  "
             f"[{_DIM}]v{__version__}[/{_DIM}]"
         )
         console.print()
