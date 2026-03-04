@@ -1,14 +1,8 @@
-<![CDATA[<div align="center">
+<div align="center">
 
-```
-   ____          _        _    _     _
-  / ___|  _   _ | |  __ _| |  / \  (_)  __| |
- | |     | | | || | / _` | | / _ \ | | / _` |
- | |___  | |_| || || (_| | |/ ___ \| || (_| |
-  \____|  \___/ |_| \__,_|_/_/   \_\_| \__,_|
-```
+# 🩺 CudaAid
 
-**GPU · CUDA · PyTorch  Environment Diagnostics**
+**GPU · CUDA · PyTorch Environment Diagnostics**
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-3776ab.svg?style=flat-square&logo=python&logoColor=white)](https://python.org)
 [![License: MIT](https://img.shields.io/badge/license-MIT-22c55e.svg?style=flat-square)](LICENSE)
@@ -28,13 +22,13 @@
 - 🔗 **Compatibility Engine** — Driver → CUDA → PyTorch matrix with automatic recommendations
 - 🩹 **Auto-Fix** — Generates and optionally executes `pip install` commands to resolve mismatches
 - 📤 **JSON Export** — Machine-readable reports with metadata (timestamp, hostname, version)
-- 🎨 **Premium CLI** — Rich-powered output with ASCII branding, status badges, and structured panels
+- 🎨 **Premium CLI** — Rich-powered output with status badges and structured panels
 
 ## 📦 Installation
 
 ```bash
 # Clone the repository
-git clone https://github.com/<your-username>/CudaAid.git
+git clone https://github.com/vipulsparmar/CudaAid.git
 cd CudaAid
 
 # Install in editable mode
@@ -76,65 +70,41 @@ cudaaid --version
 ### `cudaaid check`
 
 ```
-╭──────────────────────────────────────────────────────────╮
-│    ____          _        _    _     _                   │
-│   / ___|  _   _ | |  __ _| |  / \  (_)  __| |           │
-│  | |     | | | || | / _` | | / _ \ | | / _` |           │
-│  | |___  | |_| || || (_| | |/ ___ \| || (_| |           │
-│   \____|  \___/ |_| \__,_|_/_/   \_\_| \__,_|           │
-│   GPU · CUDA · PyTorch  Environment Diagnostics         │
-│   v1.0.0                                                │
-╰──────────────────────────────────────────────────────────╯
-
   GPU  ✓ PASS  │  CUDA  ✓ PASS  │  PyTorch  ✓ PASS
 
-╭─  ⬡  GPU  ──────────────────────────────────────────────╮
-│   Device          NVIDIA GeForce RTX 3050      ✓ PASS   │
-│   Driver          560.94                       ✓ PASS   │
-│   VRAM            8192 MiB                              │
-│   Compute Cap.    8.6                                   │
-╰──────────────────────────────────────────────────────────╯
+  ⬡  GPU
+    Device          NVIDIA GeForce RTX 3050          ✓ PASS
+    Driver          560.94                           ✓ PASS
+    VRAM            8192 MiB
+    Compute Cap.    8.6
 
-╭─  ⚡  CUDA  ─────────────────────────────────────────────╮
-│   Toolkit (nvcc)  12.6                         ✓ PASS   │
-│   Runtime (torch) 12.6                                  │
-│   nvcc in PATH    Yes                                   │
-╰──────────────────────────────────────────────────────────╯
+  ⚡ CUDA
+    Toolkit (nvcc)  12.6                             ✓ PASS
+    Runtime (torch) 12.6
+    nvcc in PATH    Yes
 
-╭─  🔥  PyTorch  ──────────────────────────────────────────╮
-│   Version         2.8.0+cu126                  ✓ PASS   │
-│   CUDA built-in   12.6                                  │
-│   CUDA available  True                         ✓ PASS   │
-│   cuDNN           91.0.2                                │
-╰──────────────────────────────────────────────────────────╯
+  🔥 PyTorch
+    Version         2.8.0+cu126                      ✓ PASS
+    CUDA built-in   12.6
+    CUDA available  True                             ✓ PASS
+    cuDNN           91.0.2
 
-╭──────────────────────────────────────────────────────────╮
-│  ✓  ALL CHECKS PASSED                                   │
-│  Driver 560.94 supports up to CUDA 12.6.                │
-╰──────────────────────────────────────────────────────────╯
+  ✓  ALL CHECKS PASSED
+  Driver 560.94 supports up to CUDA 12.6.
 
   RECOMMENDATIONS
-────────────────────────────────────────────────────────────
   1.  ✓  Recommended: PyTorch 2.6.0 with CUDA 12.4
-      ╭────────────────────────────────────────────────────╮
-      │ $ pip install torch==2.6.0 --index-url             │
-      │   https://download.pytorch.org/whl/cu124           │
-      ╰────────────────────────────────────────────────────╯
+      $ pip install torch==2.6.0 --index-url https://download.pytorch.org/whl/cu124
 ```
 
 ### `cudaaid fix --dry-run`
 
 ```
-╭──────────────────────────────────────────────────────────╮
-│  ▶  DRY RUN                                             │
-│  The following commands will be shown but not executed.  │
-╰──────────────────────────────────────────────────────────╯
+  ▶  DRY RUN
+  The following commands will be shown but not executed.
 
-╭──────────────────────────────────────────────────────────╮
-│  #   Command                                            │
-│  1   $ pip install torch==2.6.0 --index-url             │
-│        https://download.pytorch.org/whl/cu124           │
-╰──────────────────────────────────────────────────────────╯
+  #   Command
+  1   $ pip install torch==2.6.0 --index-url https://download.pytorch.org/whl/cu124
 
   Remove --dry-run to execute:  cudaaid fix
 ```
@@ -212,4 +182,3 @@ pytest
 ## 📄 License
 
 [MIT](LICENSE)
-]]>
